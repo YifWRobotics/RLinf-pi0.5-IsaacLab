@@ -15,11 +15,11 @@ hydra:
 cluster:
   num_nodes: 1
   component_placement:
-      env: 0-3
+      env: 0 ##### 0-3
       rollout:
         node_group: "rollout"
-        placement: 0-3
-      actor: 0-3
+        placement: 0 ##### 0-3
+      actor: 0 ##### 0-3
 
   node_groups:
     - label: "rollout"
@@ -45,10 +45,10 @@ runner:
   max_epochs: 1000
   max_steps: -1
 
-  only_eval: False
+  only_eval: True ##### False
   val_check_interval: -1
   save_interval: 20
-  seq_length: 4096
+  seq_length: 1024 ##### 4096
   max_prompt_length: 30
 
   resume_dir: null # Optional: path to a saved checkpoint directory, such as 'checkpoints/global_step_10'. If not None, it will be used to resume training.
@@ -60,7 +60,7 @@ algorithm:
   group_size: 1
   reward_coef: 1.0
   rollout_epoch: 2
-  eval_rollout_epoch: 3 # set eval_rollout_epoch > 0 when enable runner.only_eval or runner.val_check_interval > 0
+  eval_rollout_epoch: 1 ##### 3 # set eval_rollout_epoch > 0 when enable runner.only_eval or runner.val_check_interval > 0
 
   reward_type: chunk_level
   logprob_type: chunk_level
@@ -98,7 +98,7 @@ algorithm:
   # max length means max amount of tokens to generate
   length_params:
     max_new_token: null
-    max_length: 1024
+    max_length: 256 ##### 1024
     min_length: 1
 
 env:
@@ -112,7 +112,7 @@ env:
     use_fixed_reset_state_ids: True
 
   eval:
-    total_num_envs: 32
+    total_num_envs: 8 ##### 32
     max_episode_steps: 448
     max_steps_per_rollout_epoch: 448
     auto_reset: True
@@ -130,7 +130,7 @@ rollout:
   pipeline_stage_num: 1
 
   model:
-    model_path: "/path/to/RLinf-Gr00t-SFT-Stack-cube" # https://huggingface.co/RLinf/RLinf-Gr00t-SFT-Stack-cube
+    model_path: outputs/RLinf-Gr00t-SFT-Stack-cube ##### "/path/to/RLinf-Gr00t-SFT-Stack-cube" # https://huggingface.co/RLinf/RLinf-Gr00t-SFT-Stack-cube
     precision: ${actor.model.precision}
 
 actor:
@@ -143,7 +143,7 @@ actor:
 
   # Override the default values in model/gr00t
   model:
-    model_path: "/path/to/RLinf-Gr00t-SFT-Stack-cube" # https://huggingface.co/RLinf/RLinf-Gr00t-SFT-Stack-cube
+    model_path: outputs/RLinf-Gr00t-SFT-Stack-cube ##### "/path/to/RLinf-Gr00t-SFT-Stack-cube" # https://huggingface.co/RLinf/RLinf-Gr00t-SFT-Stack-cube
     add_value_head: True
     embodiment_tag: "isaaclab_franka"
     obs_converter_type: "isaaclab_stack_cube"
