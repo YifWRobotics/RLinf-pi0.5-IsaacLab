@@ -122,7 +122,7 @@ actor:
     model_path: "/path/to/openpi-isaaclab-model"
     model_type: "openpi"
     action_dim: 7
-    num_action_chunks: 5
+    num_action_chunks: 10
     num_steps: 5
     add_value_head: False
     openpi:
