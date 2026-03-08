@@ -107,7 +107,7 @@ rollout:
   pipeline_stage_num: 1
 
   model:
-    model_path: "/path/to/openpi-isaaclab-model"
+    model_path: outputs/Mar7-pi-05-stack-cube ##### "/path/to/openpi-isaaclab-model"
     precision: ${actor.model.precision}
 
 actor:
