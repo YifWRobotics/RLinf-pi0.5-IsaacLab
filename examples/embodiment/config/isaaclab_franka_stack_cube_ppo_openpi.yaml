@@ -85,13 +85,13 @@ env:
   train:
     total_num_envs: 64
     max_episode_steps: 448
-    max_steps_per_rollout_epoch: 320
+    max_steps_per_rollout_epoch: 480
     use_fixed_reset_state_ids: True
 
   eval:
-    total_num_envs: 32
+    total_num_envs: 8
     max_episode_steps: 448
-    max_steps_per_rollout_epoch: 320
+    max_steps_per_rollout_epoch: 480
     auto_reset: True
     ignore_terminations: True
     use_fixed_reset_state_ids: True
@@ -107,7 +107,7 @@ rollout:
   pipeline_stage_num: 1
 
   model:
-    model_path: outputs/Mar7-pi-05-stack-cube ##### "/path/to/openpi-isaaclab-model"
+    model_path: outputs/Mar7-pi-05-stack-cube-pytorch ##### "/path/to/openpi-isaaclab-model"
     precision: ${actor.model.precision}
 
 actor:
