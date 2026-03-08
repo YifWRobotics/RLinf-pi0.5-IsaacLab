@@ -42,7 +42,7 @@ from rlinf.models.embodiment.openpi.dataconfig.gsenv_dataconfig import (
     LeRobotGSEnvDataConfig,
 )
 from rlinf.models.embodiment.openpi.dataconfig.isaaclab_dataconfig import (
-    LeRobotIsaacLabDataConfig,
+    LeRobotIsaacLabStackCubeDataConfig,
 )
 from rlinf.models.embodiment.openpi.dataconfig.libero_dataconfig import (
     LeRobotLiberoDataConfig,
@@ -315,11 +315,10 @@ _CONFIGS = [
         model=pi0_config.Pi0Config(
             pi05=True, action_horizon=10, discrete_state_input=False
         ),
-        data=LeRobotIsaacLabDataConfig(
+        data=LeRobotIsaacLabStackCubeDataConfig(
             repo_id="RLinf/IsaacLab-Stack-Cube-Data",
-            base_config=DataConfig(prompt_from_task=True),
+            base_config=DataConfig(prompt_from_task=False),
             assets=AssetsConfig(assets_dir="checkpoints/torch/pi0_isaaclab/assets"),
-            extra_delta_transform=False,
         ),
         weight_loader=weight_loaders.CheckpointWeightLoader(
             "checkpoints/jax/pi05_base/params"

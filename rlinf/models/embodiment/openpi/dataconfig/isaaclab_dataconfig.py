@@ -19,14 +19,16 @@ import openpi.transforms as _transforms
 from openpi.training.config import DataConfig, DataConfigFactory, ModelTransformFactory
 from typing_extensions import override
 
-from rlinf.models.embodiment.openpi.policies import isaaclab_policy
+from rlinf.models.embodiment.openpi.policies import libero_policy
 
 
 @dataclasses.dataclass(frozen=True)
-class LeRobotIsaacLabDataConfig(DataConfigFactory):
-    """OpenPI data config for IsaacLab stack-cube style observations/actions."""
+class LeRobotIsaacLabStackCubeDataConfig(DataConfigFactory):
+    """OpenPI data config aligned with stack-cube fine-tuning recipe."""
 
-    extra_delta_transform: bool = False
+    default_prompt: str | None = (
+        "Stack the red block on the blue block, then stack the green block on the red block"
+    )
 
     @override
     def create(
@@ -36,34 +38,28 @@ class LeRobotIsaacLabDataConfig(DataConfigFactory):
             inputs=[
                 _transforms.RepackTransform(
                     {
-                        "observation/image": "image",
-                        "observation/wrist_image": "wrist_image",
-                        "observation/state": "state",
-                        "actions": "actions",
-                        "prompt": "prompt",
+                        "observation/image": "observation.images.front",
+                        "observation/wrist_image": "observation.images.wrist",
+                        "observation/state": "observation.state",
+                        "actions": "action",
                     }
                 )
             ]
         )
 
         data_transforms = _transforms.Group(
-            inputs=[isaaclab_policy.IsaacLabInputs(model_type=model_config.model_type)],
-            outputs=[isaaclab_policy.IsaacLabOutputs()],
+            inputs=[libero_policy.LiberoInputs(model_type=model_config.model_type)],
+            outputs=[libero_policy.LiberoOutputs()],
         )
 
-        if self.extra_delta_transform:
-            delta_action_mask = _transforms.make_bool_mask(6, -1)
-            data_transforms = data_transforms.push(
-                inputs=[_transforms.DeltaActions(delta_action_mask)],
-                outputs=[_transforms.AbsoluteActions(delta_action_mask)],
-            )
-
-        model_transforms = ModelTransformFactory()(model_config)
+        model_transforms = ModelTransformFactory(default_prompt=self.default_prompt)(
+            model_config
+        )
 
         return dataclasses.replace(
             self.create_base_config(assets_dirs, model_config),
             repack_transforms=repack_transform,
             data_transforms=data_transforms,
             model_transforms=model_transforms,
+            action_sequence_keys=("action",),
         )
-
