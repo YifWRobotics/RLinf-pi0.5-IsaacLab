@@ -15,9 +15,7 @@ logs/*
 outputs/*
 *.so
 .venv
-.venv_*/
 .docs-venv
 uv.lock
 rlinf/envs/maniskill/assets
 PKG-INFO
-isaac_sim
