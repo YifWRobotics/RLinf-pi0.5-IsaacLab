@@ -87,14 +87,14 @@ env:
 
   train:
     total_num_envs: 64
-    max_episode_steps: 448 # for truncation
-    max_steps_per_rollout_epoch: 448
+    max_episode_steps: 450 # for truncation
+    max_steps_per_rollout_epoch: 450
     use_fixed_reset_state_ids: True
 
   eval:
     total_num_envs: 32
-    max_episode_steps: 448
-    max_steps_per_rollout_epoch: 448
+    max_episode_steps: 450
+    max_steps_per_rollout_epoch: 450
     auto_reset: True
     ignore_terminations: True
     use_fixed_reset_state_ids: True
