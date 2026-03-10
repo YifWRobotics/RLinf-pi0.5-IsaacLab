@@ -15,6 +15,10 @@ hf download YifWRobotics/Mar7-pi-05-stack-cube-pytorch --local-dir RLinf-pi-0.5-
 ```
 
 ```bash
+cd isaac_sim
+source ./setup_conda_env.sh
+cd ..
+
 source .venv/bin/activate
 
 export EMBODIED_PATH=$(pwd)/examples/embodiment
