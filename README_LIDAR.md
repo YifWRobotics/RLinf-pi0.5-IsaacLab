@@ -42,7 +42,18 @@ source ./setup_conda_env.sh
 
 cd /workspace/RLinf
 ray stop --force || true
-bash examples/embodiment/eval_embodiment.sh isaaclab_franka_stack_cube_ppo_gr00t
+
+export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
+
+python /workspace/RLinf/examples/embodiment/eval_embodied_agent.py \
+  --config-path /workspace/RLinf/examples/embodiment/config/ \
+  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
+  runner.logger.log_path=/workspace/RLinf/logs/$(date +%Y%m%d-%H:%M:%S) \
+  cluster.component_placement.env=0 \
+  cluster.component_placement.rollout.placement=0 \
+  cluster.component_placement.actor=0 \
+  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube \
+  actor.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube
 ```
 
 ## GR00T Isaac Lab Franka Stack Cube PPO
@@ -107,7 +118,18 @@ source ./setup_conda_env.sh
 
 cd /workspace/RLinf
 ray stop --force || true
-bash examples/embodiment/eval_embodiment.sh isaaclab_franka_stack_cube_ppo_openpi
+
+export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
+
+python /workspace/RLinf/examples/embodiment/eval_embodied_agent.py \
+  --config-path /workspace/RLinf/examples/embodiment/config/ \
+  --config-name isaaclab_franka_stack_cube_ppo_openpi \
+  runner.logger.log_path=/workspace/RLinf/logs/$(date +%Y%m%d-%H:%M:%S) \
+  cluster.component_placement.env=0 \
+  cluster.component_placement.rollout.placement=0 \
+  cluster.component_placement.actor=0 \
+  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-pi-0.5-SFT-Stack-cube \
+  actor.model.model_path=/workspace/RLinf/outputs/RLinf-pi-0.5-SFT-Stack-cube
 ```
 
 ## Pi 0.5 Isaac Lab Franka Stack Cube PPO
