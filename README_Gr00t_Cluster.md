@@ -48,7 +48,7 @@ export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
 python /workspace/RLinf/examples/embodiment/eval_embodied_agent.py \
   --config-path /workspace/RLinf/examples/embodiment/config/ \
   --config-name isaaclab_franka_stack_cube_ppo_gr00t \
-  runner.logger.log_path=/workspace/RLinf/logs/$(date +%Y%m%d-%H:%M:%S) \
+  runner.logger.log_path=/workspace/RLinf/logs/eval_$(date +%Y%m%d-%H%M%S) \
   cluster.component_placement.env=0 \
   cluster.component_placement.rollout.placement=0 \
   cluster.component_placement.actor=0 \
@@ -58,3 +58,41 @@ python /workspace/RLinf/examples/embodiment/eval_embodied_agent.py \
 
 ## GR00T Isaac Lab Franka Stack Cube PPO
 
+```bash
+source /usr/local/bin/switch_env gr00t
+
+export XDG_CACHE_HOME=/root/.cache
+export HF_HOME=/root/.cache/huggingface
+export TORCH_HOME=/root/.cache/torch
+export UV_CACHE_DIR=/root/.cache/uv
+export PIP_CACHE_DIR=/root/.cache/pip
+
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export AWS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+cd /workspace/RLinf/isaac_sim
+source ./setup_conda_env.sh
+
+cd /workspace/RLinf
+ray stop --force || true
+
+export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
+
+python /workspace/RLinf/examples/embodiment/train_embodied_agent.py \
+  --config-path /workspace/RLinf/examples/embodiment/config/ \
+  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
+  runner.logger.log_path=/workspace/RLinf/logs/train_$(date +%Y%m%d-%H%M%S) \
+  cluster.component_placement.env=0 \
+  cluster.component_placement.rollout.placement=0 \
+  cluster.component_placement.actor=0 \
+  actor.micro_batch_size=4 \
+  actor.global_batch_size=32 \
+  runner.seq_length=1024 \
+  runner.val_check_interval=-1 \
+  algorithm.update_epoch=1 \
+  algorithm.rollout_epoch=1 \
+  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube \
+  actor.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube
+```
