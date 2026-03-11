@@ -1,20 +1,20 @@
-# GR00T n1.5 Isaac Lab on HPC Cluster
+# pi 0.5 Isaac Lab on HPC Cluster
 
-## GR00T Env
+## pi 0.5 Env
 
 ```bash
-mkdir -p ~/scratch/containers_rlinf
-cd ~/scratch/containers_rlinf
+mkdir -p ~/scratch/containers_rlinf_isaaclab_openpi_gr00t
+cd ~/scratch/containers_rlinf_isaaclab_openpi_gr00t
 
-apptainer pull rlinf_isaaclab.sif docker://rlinf/rlinf:agentic-rlinf0.1-isaaclab
+apptainer pull rlinf_isaaclab_openpi_gr00t.sif
 ```
 
-## GR00T Isaac Lab Franka Stack Cube Eval
+## pi 0.5 Isaac Lab Franka Stack Cube Eval
 
 Download model
 ```bash
 cd outputs
-hf download RLinf/RLinf-Gr00t-SFT-Stack-cube --local-dir RLinf-Gr00t-SFT-Stack-cube
+hf download YifWRobotics/Mar7-pi-05-stack-cube-pytorch --local-dir RLinf-pi05-SFT-Stack-cube
 ```
 
 Run eval
@@ -22,9 +22,9 @@ Run eval
 apptainer shell --nv \
   --bind ~/scratch/RLinf-pi0.5-IsaacLab:/workspace/RLinf \
   --bind ~/scratch/.cache:/root/.cache \
-  ~/scratch/containers_rlinf/rlinf_isaaclab.sif
+  ~/scratch/containers_rlinf_isaaclab_openpi_gr00t/rlinf_isaaclab_openpi_gr00t.sif
 
-source /usr/local/bin/switch_env gr00t
+source /usr/local/bin/switch_env openpi
 
 export XDG_CACHE_HOME=/root/.cache
 export HF_HOME=/root/.cache/huggingface
@@ -47,19 +47,16 @@ export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
 
 python /workspace/RLinf/examples/embodiment/eval_embodied_agent.py \
   --config-path /workspace/RLinf/examples/embodiment/config/ \
-  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
+  --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
   runner.logger.log_path=/workspace/RLinf/logs/eval_$(date +%Y%m%d-%H%M%S) \
-  cluster.component_placement.env=0 \
-  cluster.component_placement.rollout.placement=0 \
-  cluster.component_placement.actor=0 \
-  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube \
-  actor.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube
+  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-pi05-SFT-Stack-cube \
+  actor.model.model_path=/workspace/RLinf/outputs/RLinf-pi05-SFT-Stack-cube
 ```
 
-## GR00T Isaac Lab Franka Stack Cube PPO
+## pi0.5 Isaac Lab Franka Stack Cube PPO
 
 ```bash
-source /usr/local/bin/switch_env gr00t
+source /usr/local/bin/switch_env openpi
 
 export XDG_CACHE_HOME=/root/.cache
 export HF_HOME=/root/.cache/huggingface
@@ -82,17 +79,13 @@ export EMBODIED_PATH=/workspace/RLinf/examples/embodiment
 
 python /workspace/RLinf/examples/embodiment/train_embodied_agent.py \
   --config-path /workspace/RLinf/examples/embodiment/config/ \
-  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
+  --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
   runner.logger.log_path=/workspace/RLinf/logs/train_$(date +%Y%m%d-%H%M%S) \
-  cluster.component_placement.env=0 \
-  cluster.component_placement.rollout.placement=0 \
-  cluster.component_placement.actor=0 \
   actor.micro_batch_size=4 \
   actor.global_batch_size=32 \
-  runner.seq_length=1024 \
   runner.val_check_interval=-1 \
   algorithm.update_epoch=1 \
   algorithm.rollout_epoch=1 \
-  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube \
-  actor.model.model_path=/workspace/RLinf/outputs/RLinf-Gr00t-SFT-Stack-cube
+  rollout.model.model_path=/workspace/RLinf/outputs/RLinf-pi05-SFT-Stack-cube \
+  actor.model.model_path=/workspace/RLinf/outputs/RLinf-pi05-SFT-Stack-cube
 ```

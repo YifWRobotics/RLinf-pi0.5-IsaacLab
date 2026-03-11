@@ -28,9 +28,6 @@ python examples/embodiment/eval_embodied_agent.py \
   --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
   runner.only_eval=True \
   runner.logger.log_path=logs/eval_$(date +%Y%m%d-%H:%M:%S) \
-  cluster.component_placement.env=0 \
-  cluster.component_placement.rollout.placement=0 \
-  cluster.component_placement.actor=0 \
   rollout.model.model_path=$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch \
   actor.model.model_path=$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch \
   env.train.total_num_envs=1 \
@@ -56,9 +53,6 @@ export EMBODIED_PATH=$(pwd)/examples/embodiment
 python examples/embodiment/eval_embodied_agent.py \
   --config-path "$EMBODIED_PATH/config" \
   --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
-  cluster.component_placement.env=0 \
-  cluster.component_placement.rollout.placement=0 \
-  cluster.component_placement.actor=0 \
   runner.only_eval=True \
   runner.logger.log_path="$(pwd)/logs/eval_$(date +%Y%m%d-%H:%M:%S)" \
   rollout.model.model_path="$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch" \
