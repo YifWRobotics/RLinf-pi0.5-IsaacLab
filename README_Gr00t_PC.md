@@ -1,17 +1,17 @@
-# Pi 0.5 Isaac Lab on Local PC
+# GR00T n1.5 Isaac Lab on Local PC
 
-## Pi 0.5 Env
+## GR00T Env
 
 ```bash
-bash requirements/install.sh embodied --model openpi --env isaaclab --no-root
+bash requirements/install.sh embodied --model gr00t --env isaaclab --no-root
 ```
 
-## Pi 0.5 Isaac Lab Franka Stack Cube Eval
+## GR00T Isaac Lab Franka Stack Cube Eval
 
 Download model
 ```bash
 cd outputs
-hf download YifWRobotics/Mar7-pi-05-stack-cube-pytorch --local-dir RLinf-pi-0.5-SFT-Stack-cube
+hf download RLinf/RLinf-Gr00t-SFT-Stack-cube --local-dir RLinf-Gr00t-SFT-Stack-cube
 ```
 
 ```bash
@@ -25,14 +25,14 @@ export EMBODIED_PATH=$(pwd)/examples/embodiment
 
 python examples/embodiment/eval_embodied_agent.py \
   --config-path config \
-  --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
+  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
   runner.only_eval=True \
   runner.logger.log_path=logs/eval_$(date +%Y%m%d-%H:%M:%S) \
   cluster.component_placement.env=0 \
   cluster.component_placement.rollout.placement=0 \
   cluster.component_placement.actor=0 \
-  rollout.model.model_path=$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch \
-  actor.model.model_path=$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch \
+  rollout.model.model_path=$(pwd)/outputs/RLinf-Gr00t-SFT-Stack-cube \
+  actor.model.model_path=$(pwd)/outputs/RLinf-Gr00t-SFT-Stack-cube \
   env.train.total_num_envs=1 \
   env.eval.total_num_envs=1
 ```
@@ -45,7 +45,7 @@ docker run -it --rm --gpus all \
   yifwrobotics/rlinf:isaaclab-openpi-gr00t
 
 cd /workspace/RLinf
-source /usr/local/bin/switch_env openpi
+source /usr/local/bin/switch_env gr00t
 
 cd isaac_sim
 source ./setup_conda_env.sh
@@ -55,14 +55,14 @@ export EMBODIED_PATH=$(pwd)/examples/embodiment
 
 python examples/embodiment/eval_embodied_agent.py \
   --config-path "$EMBODIED_PATH/config" \
-  --config-name isaaclab_franka_stack_cube_ppo_openpi_pi05 \
+  --config-name isaaclab_franka_stack_cube_ppo_gr00t \
+  runner.only_eval=True \
+  runner.logger.log_path="$(pwd)/logs/eval_$(date +%Y%m%d-%H:%M:%S)" \
   cluster.component_placement.env=0 \
   cluster.component_placement.rollout.placement=0 \
   cluster.component_placement.actor=0 \
-  runner.only_eval=True \
-  runner.logger.log_path="$(pwd)/logs/eval_$(date +%Y%m%d-%H:%M:%S)" \
-  rollout.model.model_path="$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch" \
-  actor.model.model_path="$(pwd)/outputs/Mar7-pi-05-stack-cube-pytorch" \
+  rollout.model.model_path="$(pwd)/outputs/RLinf-Gr00t-SFT-Stack-cube" \
+  actor.model.model_path="$(pwd)/outputs/RLinf-Gr00t-SFT-Stack-cube" \
   env.train.total_num_envs=1 \
   env.eval.total_num_envs=1
 ```
