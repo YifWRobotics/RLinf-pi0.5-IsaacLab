@@ -6,7 +6,8 @@
 mkdir -p ~/scratch/containers_rlinf_isaaclab_openpi_gr00t
 cd ~/scratch/containers_rlinf_isaaclab_openpi_gr00t
 
-apptainer pull rlinf_isaaclab_openpi_gr00t.sif
+apptainer pull rlinf_isaaclab_openpi_gr00t.sif \
+  docker://yifwrobotics/rlinf:isaaclab-openpi-gr00t
 ```
 
 ## pi 0.5 Isaac Lab Franka Stack Cube Eval
