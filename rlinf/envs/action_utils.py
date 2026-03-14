@@ -85,7 +85,11 @@ def prepare_actions_for_isaaclab(
     Here reture a general 7 dof action. If the action is modified, please change the output of the model
     For example, in `RLinf/rlinf/models/embodiment/gr00t/simulation_io.py`
     """
-    chunk_actions = torch.from_numpy(raw_chunk_actions)
+    chunk_actions = (
+        torch.from_numpy(raw_chunk_actions)
+        if isinstance(raw_chunk_actions, np.ndarray)
+        else raw_chunk_actions
+    )
     if SupportedModel(model_type) in [
         SupportedModel.OPENVLA,
         SupportedModel.OPENVLA_OFT,
@@ -189,6 +193,12 @@ def prepare_actions(
     policy: str = "widowx_bridge",
     wm_env_type=None,
 ) -> torch.Tensor | np.ndarray:
+    raw_chunk_actions = (
+        raw_chunk_actions.cpu().numpy()
+        if isinstance(raw_chunk_actions, torch.Tensor)
+        else raw_chunk_actions
+    )
+
     env_type = SupportedEnvType(env_type)
     if env_type == SupportedEnvType.LIBERO:
         chunk_actions = prepare_actions_for_libero(
