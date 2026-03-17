@@ -429,7 +429,7 @@ Visualization and Results
      logger:
        log_path: "../results"
        project_name: rlinf
-       experiment_name: "isaaclab_franka_stack_cube_ppo_gr00t"
+       experiment_name: "isaaclab_franka_stack_cube_ppo_gr00t" # "isaaclab_franka_stack_cube_ppo_openpi_pi05"
        logger_backends: ["tensorboard", "wandb"] # tensorboard, wandb, swanlab
 
 Reinforcement learning result
@@ -447,9 +447,9 @@ The following table summarizes the performance improvement throughout the traini
 | Gr00t n1.5 RL Tuned Model     | 0.897        |
 | (SFT + RL)                    |              | 
 +-------------------------------+--------------+
-| Openpi π1.5 SFT Model         | 0.859        |
+| Openpi π0.5 SFT Model         | 0.859        |
 +-------------------------------+--------------+
-| Gr00t n1.5 RL Tuned Model     | 0.953        |
+| Openpi π0.5 RL Tuned Model     | 0.953        |
 | (SFT + RL)                    |              | 
 +-------------------------------+--------------+
 
