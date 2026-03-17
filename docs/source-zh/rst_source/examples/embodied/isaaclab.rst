@@ -157,9 +157,9 @@ Gr00t n1.5 模型下载
    pip install huggingface-hub
    hf download RLinf/RLinf-Gr00t-SFT-Stack-cube --local-dir RLinf-Gr00t-SFT-Stack-cube
 
-为了使模型能够通过强化学习进一步提升性能，我们在 IsaacLab 环境中采集了 ``stack cube`` 任务的人类演示数据，并以 **GR00T N1.5**（<https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release>）作为基础模型进行了监督微调，从而获得了具备基础成功率的起始模型。
+为了使模型能够通过强化学习进一步提升性能，我们在 IsaacLab 环境中采集了 ``stack cube`` 任务的人类演示数据，并以 `GR00T N1.5 <https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release>`__ 作为基础模型进行了监督微调，从而获得了具备基础成功率的起始模型。
 
-数据集已开源到 HuggingFace：<https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>
+数据集已开源到 HuggingFace：`IsaacLab-Stack-Cube-Data <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>`__
 
 Gr00t N1.5 运行脚本
 -------------------
@@ -304,9 +304,9 @@ Openpi π0.5 模型下载
    pip install huggingface-hub
    hf download YifWRobotics/RLinf-pi05-SFT-Stack-cube --local-dir RLinf-pi05-SFT-Stack-cube
 
-为了使模型能够通过强化学习进一步提升性能，我们在 IsaacLab 环境中采集了 ``stack cube`` 任务的人类演示数据，并以 **openpi π0.5**（<https://github.com/Physical-Intelligence/openpi>）作为基础模型进行了监督微调，从而获得了具备基础成功率的起始模型。
+为了使模型能够通过强化学习进一步提升性能，我们在 IsaacLab 环境中采集了 ``stack cube`` 任务的人类演示数据，并以 `openpi π0.5 <https://github.com/Physical-Intelligence/openpi>`__ 作为基础模型进行了监督微调，从而获得了具备基础成功率的起始模型。
 
-数据集已开源到 HuggingFace：<https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>
+数据集已开源到 HuggingFace：`IsaacLab-Stack-Cube-Data <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>`__
 
 Openpi π0.5 运行脚本
 --------------------

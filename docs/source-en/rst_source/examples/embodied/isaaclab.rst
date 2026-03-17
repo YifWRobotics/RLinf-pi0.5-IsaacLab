@@ -76,7 +76,7 @@ Algorithm
    - Compute the advantage of each action by subtracting the group's mean reward
 
 Dependency Installation for Gr00t n1.5
------------------------
+----------------------------------------
 
 1. Clone RLinf Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,7 +141,7 @@ After downloading, set environment variables via:
    This step must be done every time you open a new terminal to use Isaac Sim.
 
 Model Download for Gr00t n1.5
-----------------
+--------------------------------
 
 .. code-block:: bash
 
@@ -157,12 +157,12 @@ Model Download for Gr00t n1.5
    pip install huggingface-hub
    hf download RLinf/RLinf-Gr00t-SFT-Stack-cube --local-dir RLinf-Gr00t-SFT-Stack-cube
 
-To enable the model to improve its performance through reinforcement learning, we collected human demonstration data for the ``stack cube`` task in the IsaacLab environment and conducted supervised fine-tuning with **GR00T N1.5** (<https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release>) as the base model, thereby achieving a baseline task success rate.
+To enable the model to improve its performance through reinforcement learning, we collected human demonstration data for the ``stack cube`` task in the IsaacLab environment and conducted supervised fine-tuning with `GR00T N1.5 <https://github.com/NVIDIA/Isaac-GR00T/tree/n1.5-release>`__ as the base model, thereby achieving a baseline task success rate.
 
-The dataset has been open-sourced on HuggingFace: <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>
+The dataset has been open-sourced on HuggingFace: `IsaacLab-Stack-Cube-Data <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>`__
 
 Running the Script for Gr00t N1.5
-------------------
+----------------------------------
 
 The default configuration file for this example is ``examples/embodiment/config/isaaclab_franka_stack_cube_ppo_gr00t.yaml``. You can modify the configuration file to adjust the training settings, such as GPU allocation, training hyperparameters, and logging options.
 
@@ -227,7 +227,7 @@ To evaluate gr00t n1.5 in the IsaacLab environment, run:
    bash examples/embodiment/eval_embodiment.sh isaaclab_franka_stack_cube_ppo_gr00t
 
 Dependency Installation for Openpi π0.5
------------------------
+---------------------------------------
 
 1. Clone RLinf Repository
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -292,7 +292,7 @@ After downloading, set environment variables via:
    This step must be done every time you open a new terminal to use Isaac Sim.
 
 Model Download for Openpi π0.5
-----------------
+--------------------------------
 
 .. code-block:: bash
 
@@ -308,12 +308,12 @@ Model Download for Openpi π0.5
    pip install huggingface-hub
    hf download YifWRobotics/RLinf-pi05-SFT-Stack-cube --local-dir RLinf-pi05-SFT-Stack-cube
 
-To enable the model to improve its performance through reinforcement learning, we collected human demonstration data for the ``stack cube`` task in the IsaacLab environment and conducted supervised fine-tuning with **openpi π0.5** (<https://github.com/Physical-Intelligence/openpi>) as the base model, thereby achieving a baseline task success rate.
+To enable the model to improve its performance through reinforcement learning, we collected human demonstration data for the ``stack cube`` task in the IsaacLab environment and conducted supervised fine-tuning with `openpi π0.5 <https://github.com/Physical-Intelligence/openpi>`__ as the base model, thereby achieving a baseline task success rate.
 
-The dataset has been open-sourced on HuggingFace: <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>
+The dataset has been open-sourced on HuggingFace: `IsaacLab-Stack-Cube-Data <https://huggingface.co/datasets/RLinf/IsaacLab-Stack-Cube-Data>`__
 
 Running the Script for Openpi π0.5
-------------------
+----------------------------------
 
 **1. Key Cluster Configuration**
 
@@ -437,21 +437,22 @@ Reinforcement learning result
 
 The following table summarizes the performance improvement throughout the training stages:
 
-+-------------------------------+--------------+
-| Model Stage                   | Success Rate |
-+===============================+==============+
-| Gr00t n1.5 Base Model (No SFT)| 0.0          |
-+-------------------------------+--------------+
-| Gr00t n1.5 SFT Model          | 0.654        |
-+-------------------------------+--------------+
-| Gr00t n1.5 RL Tuned Model     | 0.897        |
-| (SFT + RL)                    |              | 
-+-------------------------------+--------------+
-| Openpi π0.5 SFT Model         | 0.859        |
-+-------------------------------+--------------+
-| Openpi π0.5 RL Tuned Model     | 0.953        |
-| (SFT + RL)                    |              | 
-+-------------------------------+--------------+
+.. list-table::
+   :header-rows: 1
+   :widths: 70 30
+
+   * - Model Stage
+     - Success Rate
+   * - Gr00t n1.5 Base Model (No SFT)
+     - 0.0
+   * - Gr00t n1.5 SFT Model
+     - 0.654
+   * - Gr00t n1.5 RL Tuned Model (SFT + RL)
+     - 0.897
+   * - Openpi π0.5 SFT Model
+     - 0.859
+   * - Openpi π0.5 RL Tuned Model (SFT + RL)
+     - 0.953
 
 
 Acknowledgements
