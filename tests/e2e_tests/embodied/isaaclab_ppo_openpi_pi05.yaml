@@ -119,7 +119,7 @@ actor:
     model_path: "/workspace/dataset/RLinf-Pi05-SFT"
     model_type: "openpi"
     action_dim: 7
-    num_action_chunks: 5
+    num_action_chunks: 4
     num_steps: 5
     add_value_head: True
     openpi:

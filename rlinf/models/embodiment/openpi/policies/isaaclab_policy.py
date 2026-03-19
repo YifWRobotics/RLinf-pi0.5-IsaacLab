@@ -82,4 +82,3 @@ class IsaacLabOutputs(transforms.DataTransformFn):
         # IsaacLab stack-cube expects binary gripper command in {-1, +1}.
         actions[..., -1] = np.sign(actions[..., -1])
         return {"actions": actions}
-
