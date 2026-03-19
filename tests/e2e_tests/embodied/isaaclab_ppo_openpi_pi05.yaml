@@ -81,14 +81,14 @@ env:
 
   train:
     total_num_envs: 4
-    max_episode_steps: 16
-    max_steps_per_rollout_epoch: 16
+    max_episode_steps: 20
+    max_steps_per_rollout_epoch: 20
     use_fixed_reset_state_ids: True
 
   eval:
     total_num_envs: 1
-    max_episode_steps: 16
-    max_steps_per_rollout_epoch: 16
+    max_episode_steps: 20
+    max_steps_per_rollout_epoch: 20
     auto_reset: True
     ignore_terminations: True
     use_fixed_reset_state_ids: True
